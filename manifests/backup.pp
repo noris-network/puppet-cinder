@@ -85,16 +85,15 @@ class cinder::backup (
     } else {
       $ensure = 'stopped'
     }
-  }
 
-  service { 'cinder-backup':
-    ensure    => $ensure,
-    name      => $::cinder::params::backup_service,
-    enable    => $enabled,
-    hasstatus => true,
-    tag       => 'cinder-service',
+    service { 'cinder-backup':
+      ensure    => $ensure,
+      name      => $::cinder::params::backup_service,
+      enable    => $enabled,
+      hasstatus => true,
+      tag       => 'cinder-service',
+    }
   }
-
   if $backup_topic {
     warning('The backup_topic parameter is deprecated, has no effect and will be removed in future release.')
   }
